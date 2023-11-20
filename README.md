@@ -1,4 +1,4 @@
-# dachshund-thief
+# canine-caper
 
 ## GOAL
 
