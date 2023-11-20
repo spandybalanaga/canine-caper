@@ -10,7 +10,10 @@ Use the L and R Arrow keys to walk. Use the mouse cursor to click on things to i
 
 ## SCREENSHOTS
 
-![Title Screen] (https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/titlescreen.png)
-![Fortune Teller Quest] (https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/fortunetellerquest.png)
-![Dance Quest] (https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/dancequest.png)
-![Final Screen] (https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/gameover.png)
+![Title Screen](https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/titlescreen.png) 
+
+![Fortune Teller Quest](https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/fortunetellerquest.png)
+
+![Dance Quest](https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/dancequest.png)
+
+![Final Screen](https://raw.githubusercontent.com/spandybalanaga/dachshund-thief/main/screenshots/gameover.png)
