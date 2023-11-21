@@ -67,6 +67,10 @@ tSteal = False
 paid = False
 cCrystal = False
 cBottle = False
+cFruit = False
+cCig = False
+cVeg = False
+cBoombox = False
 
 cBench = False
 benchIB = False
@@ -287,6 +291,11 @@ def introSeq():
         while ((dogx >= 179) and (dogx < 1000)):
         
             for event in pg.event.get():
+                if event.type == pg.QUIT: #exit game
+                    running = False
+                    pg.quit()
+                    sys.exit()
+                                
                 if event.type == KEYUP:
                     ##print(dogx)
                     num+=1
@@ -303,6 +312,11 @@ def introSeq():
             pg.display.flip()
 
         if dogx >= 1000:
+            for event in pg.event.get():
+                if event.type == pg.QUIT: #exit game
+                    running = False
+                    pg.quit()
+                    sys.exit()
 
             busstop.setCurrentRoom()
             screen.blit(crystal, (747,23))
@@ -331,6 +345,10 @@ def outro():
     while dogx > 412:
             
         for event in pg.event.get():
+            if event.type == pg.QUIT: #exit game
+                running = False
+                pg.quit()
+                sys.exit()
             if event.type == KEYUP:
                 ##print(dogx)
                 num+=1
@@ -350,6 +368,14 @@ def outro():
 
 
     while dogx <= 412:
+
+        for event in pg.event.get():
+                if event.type == pg.QUIT: #exit game
+                    running = False
+                    pg.quit()
+                    sys.exit()
+
+        
         busstop.setCurrentRoom()
     
         screen.blit(player, (plx,ply))
@@ -440,7 +466,7 @@ while running == True:
         if player.get_rect(topleft=(plx,ply)).colliderect(doorL): ##if touching Left edge of display ##maybe change to if x is less than
                 if isStealing():
                     endTime = currentTime + 5000
-                    plx = plx + 120
+                    plx = plx + 300
                     tSteal = True
                 else:
                     endTime = 0
@@ -466,7 +492,7 @@ while running == True:
             
             if isStealing():
                 endTime = currentTime + 5000
-                plx = plx - 120
+                plx = plx - 300
                 tSteal = True
                     
             else:
@@ -518,6 +544,12 @@ while running == True:
 
 
             if event.type == pg.MOUSEBUTTONUP: ##if you click
+                cPothos = False
+                cBoombox = False
+                cBartender = False
+                cDJ = False
+                cBottle = False
+                
                 pos = pg.mouse.get_pos()
                 posx, posy = pg.mouse.get_pos()
                 
@@ -527,6 +559,10 @@ while running == True:
                     cPothos = True
                     inventory.append(pothos)
 
+                if posx > 696 and posx < 956 and posy > 140 and posy < 290: ## if clicking boombox
+                    endTime = currentTime + 3000
+                    cBoombox = True
+
                 if bartender.get_rect(topleft = (250,80)).collidepoint(pos): #if clicking bartender
                     endTime = currentTime + 5000
                     cBartender = True
@@ -535,12 +571,16 @@ while running == True:
                     endTime = currentTime + 5000
                     cDJ = True
                 if posy > 208 and posy < 251 and posx > 200 and posx < 224 : ##if clicking green bottle on bar
-                    endTime = currentTime +5000
+                    endTime = currentTime +3000
                     cBottle = True
 
                     
         if rooms[currentRoom] == garden: #in garden
             if event.type == pg.MOUSEBUTTONUP: ##if you click
+                cGardener = False
+                ptPothos = False
+                ptMonsterra = False
+                
                 pos = pg.mouse.get_pos()
                 posx, posy = pg.mouse.get_pos()
 
@@ -568,7 +608,9 @@ while running == True:
 
         if rooms[currentRoom] == street: #While in the Street
             if event.type == pg.MOUSEBUTTONUP: ##if you click
+              
                 pos = pg.mouse.get_pos()
+                posx, posy = pg.mouse.get_pos()
                 
                 if monsterra.get_rect(topleft = (517,130)).collidepoint(pos) and ((cPsyIB == False) or ("tea leaves" in missions)): ##if clicking plant
                     endTime = currentTime + 3000
@@ -579,11 +621,22 @@ while running == True:
                 if psychic.get_rect(topleft = (350,148)).collidepoint(pos):
                     endTime = currentTime + 5000
                     cPsychic = True
+
+                    
                     
 
         if rooms[currentRoom] == shop: #While in the SHOP
             if event.type == pg.MOUSEBUTTONUP: ##if you click
+
+                Cashier = False
+                cPB = False
+                cFlour = False
+                cFruit = False
+                cCig = False
+                cVeg = False
+            
                 pos = pg.mouse.get_pos()
+                posx, posy = pg.mouse.get_pos()
 
                 if cashier.get_rect(topleft = (45,115)).collidepoint(pos):
                     endTime = currentTime + 5000
@@ -597,10 +650,27 @@ while running == True:
                     endTime = currentTime + 1000
                     cFlour = True
                     inventory.append(flour)
+                    
+                if posx > 612 and posx < 813 and posy > 182 and posy < 269: ##if clicking fruits
+                    #print("Clicking fruits")
+                    endTime = currentTime + 3000
+                    cFruit = True
+
+                if posx > 9 and posx < 61 and posy > 64 and posy < 159: ##if clicking cigarettes
+                    #print("Clicking cigs")
+                    endTime = currentTime + 3000
+                    cCig = True
+
+                if posx > 488 and posx < 607 and posy > 130 and posy < 271: ##if clicking veg
+                    #print("Clicking veg")
+                    endTime = currentTime + 3000
+                    cVeg = True
+
 
        
         if rooms[currentRoom] == bakery: #While in the BAKERY
             if event.type == pg.MOUSEBUTTONUP: ##if you click
+                
                 pos = pg.mouse.get_pos()
 
                 if baker.get_rect(topleft = (390, 15)).collidepoint(pos):
@@ -608,7 +678,11 @@ while running == True:
                     cBaker = True
                 
         if rooms[currentRoom] == busstop:
+            
             if event.type == pg.MOUSEBUTTONUP: ##if you click
+                cCrystal = False
+                cBench = False
+                
                 pos = pg.mouse.get_pos()
                 posx, posy = pg.mouse.get_pos()
 
@@ -705,11 +779,17 @@ while running == True:
 #-------------------------------------------------------------------------------------------------------------------------
 ##--------------------------------TEXT BOXES----------------------------------# text box needs to be on top of player 
 
-    if rooms[currentRoom] == bar:
+    if rooms[currentRoom] == bar: ##IN BAR
+        
+        if cBoombox == True:
+            textbox("You: The music here is really cool...", "")
+            if currentTime > endTime:
+                cBoombox = False
+        
         if cBottle == True:
             textbox("You try a sip of this drink. It gives you the zoomies!", "SPEED increases +10")
+            zoomies = True
             if currentTime > endTime:
-                zoomies = True
                 cBottle = False
         if cPothos == True: 
             textbox("+ Pothos to inventory!", " ")
@@ -780,7 +860,7 @@ while running == True:
 
                     
 
-    if rooms[currentRoom] == street:
+    if rooms[currentRoom] == street: ##STREET
         if cMonsterra == True: 
             textbox("+ Monsterra to inventory", " ")
             if currentTime > endTime:
@@ -814,7 +894,7 @@ while running == True:
                 
         if cPsyIB == True and cPsychic == False and (not ("tea leaves" or "crystal ball") in missions):
             #print("input box open!")
-            inputBox("Ask the psychic to consult the ",  "spirits to help you find the dog?", 2)
+            inputBox("Ask the psychic for help ",  "in finding the dog?", 2)
             if event.type == pg.MOUSEBUTTONUP:
                 pos = pg.mouse.get_pos()
                 if pg.Rect((380,200), (50,20)).collidepoint(pos): ## YES BUTTON
@@ -862,9 +942,11 @@ while running == True:
                 #print("times up")
                 ptPothos = False;
 
-    if rooms[currentRoom] == shop:
+    if rooms[currentRoom] == shop: ##IN SHOP
         if tSteal == True:
             textbox("Hey! You need to pay for that! I'm putting these back", "on the shelves till you come back with money")
+            pg.display.flip()
+            pg.time.wait(500)
             if currentTime > endTime:
                 #print("times up")
                 tSteal = False
@@ -902,6 +984,21 @@ while running == True:
                 #print("times up")
                 cCashier = False;
 
+        if cFruit == True:
+            textbox("You: These fruits look so fresh... Yum!", "")
+            if currentTime > endTime:
+                cFruit = False
+
+        if cCig == True:
+            textbox("You need I.D if you want some cigs...", "")
+            if currentTime > endTime:
+                cCig = False
+
+        if cVeg == True and "get herbs" in missions:
+            textbox("These aren't the kind of plants the gardener wants...", "")
+            if currentTime > endTime:
+                cVeg = False
+
         if cPB == True:
             textbox("+ Peanut Butter to inventory", "")
             if currentTime > endTime:
@@ -914,7 +1011,7 @@ while running == True:
                 cFlour = False
                 
 
-    if rooms[currentRoom] == bakery:
+    if rooms[currentRoom] == bakery: ##IN BAKERY
         if cBaker == True:
             if "bake cookies" in missions:
                 if (peanutbutter and flour) in inventory:
